@@ -4,3 +4,20 @@
     margin: 0 auto;
     padding: 48px 64px;
 }
+
+.layout {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    gap: 64px;
+}
+
+.sidebar {
+    width: 360px;
+    flex-shrink: 0;
+}
+
+.results {
+    width: 767px;
+    min-width: 0;
+}

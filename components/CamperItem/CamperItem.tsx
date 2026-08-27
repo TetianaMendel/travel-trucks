@@ -1,15 +1,30 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-import type { CamperListItem } from '@/types/camper';
+import {
+  FaCog,
+  FaGasPump,
+  FaStar,
+  FaTruck,
+} from "react-icons/fa";
 
-import styles from './CamperItem.module.css';
+import { GrMapLocation } from "react-icons/gr";
+
+import type { CamperListItem } from "@/types/camper";
+
+import styles from "./CamperItem.module.css";
 
 type Props = {
   item: CamperListItem;
 };
 
 const CamperItem = ({ item }: Props) => {
+  const formattedLocation = item.location
+    .split(",")
+    .map((part) => part.trim())
+    .reverse()
+    .join(", ");
+
   return (
     <li className={styles.card}>
       <div className={styles.imageWrapper}>
@@ -35,11 +50,22 @@ const CamperItem = ({ item }: Props) => {
 
         <div className={styles.meta}>
           <span className={styles.rating}>
-            ★ {item.rating} ({item.totalReviews} reviews)
+            <FaStar
+              className={styles.ratingIcon}
+              aria-hidden="true"
+            />
+
+            {item.rating} (
+            {item.totalReviews} reviews)
           </span>
 
           <span className={styles.location}>
-            📍 {item.location}
+            <GrMapLocation
+              className={styles.locationIcon}
+              aria-hidden="true"
+            />
+
+            {formattedLocation}
           </span>
         </div>
 
@@ -49,14 +75,29 @@ const CamperItem = ({ item }: Props) => {
 
         <div className={styles.features}>
           <span className={styles.feature}>
+            <FaGasPump
+              className={styles.featureIcon}
+              aria-hidden="true"
+            />
+
             {item.engine}
           </span>
 
           <span className={styles.feature}>
+            <FaCog
+              className={styles.featureIcon}
+              aria-hidden="true"
+            />
+
             {item.transmission}
           </span>
 
           <span className={styles.feature}>
+            <FaTruck
+              className={styles.featureIcon}
+              aria-hidden="true"
+            />
+
             {item.form}
           </span>
         </div>
