@@ -1,7 +1,6 @@
 .hero {
   min-height: 100vh;
-  background-image:
-    url('/images/hero.jpg');
+  background-image: url('/images/hero.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -9,8 +8,8 @@
 
 .overlay {
   display: flex;
-  min-height: 100vh;
   align-items: center;
+  min-height: 100vh;
 }
 
 .content {
@@ -18,40 +17,46 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 64px;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .content h1 {
   max-width: 600px;
-  margin-bottom: 16px;
+  margin: 0 0 16px;
+  font-family: var(--font-family);
   font-weight: 600;
   font-size: 48px;
   line-height: 67%;
-  color: #f7f7f7;
+  color: var(--white);
 }
 
 .content p {
-  margin-bottom: 40px;
+  margin: 0 0 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
   font-size: 24px;
   line-height: 133%;
+  color: var(--white);
 }
 
 .button {
   display: inline-flex;
-  padding: 16px 60px;
   align-items: center;
   justify-content: center;
+  padding: 16px 60px;
   border-radius: 200px;
-  background: #829b91;
-  color: #ffffff;
+  background-color: var(--grey-green);
+  font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: -0.01em;
+  color: var(--white);
+  transition: background-color 200ms ease;
 }
 
 .button:hover {
-  background: #6d7b75;
+  background-color: var(--green-hover);
 }
 
 .catalog {

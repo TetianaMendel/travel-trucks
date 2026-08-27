@@ -2,9 +2,10 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import CamperItem from "@/components/CamperItem/CamperItem";
+import { getCampers } from "@/lib/api/clientApi";
 
 import styles from "./CamperList.module.css";
-import { getCampers } from "@/lib/api/clientApi";
 
 const PER_PAGE = 4;
 
@@ -65,13 +66,12 @@ export default function CamperList() {
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.title}>Campers</h1>
-
       <ul className={styles.list}>
         {campers.map((camper) => (
-          <li key={camper.id}>
-            {camper.name}
-          </li>
+          <CamperItem
+            key={camper.id}
+            item={camper}
+          />
         ))}
       </ul>
 

@@ -1,36 +1,38 @@
 export type CamperForm =
-  | "alcove"
-  | "panel_van"
-  | "integrated"
-  | "semi_integrated";
+  | 'alcove'
+  | 'panel_van'
+  | 'integrated'
+  | 'semi_integrated';
 
 export type CamperTransmission =
-  | "automatic"
-  | "manual";
+  | 'automatic'
+  | 'manual';
 
 export type CamperEngine =
-  | "diesel"
-  | "petrol"
-  | "hybrid"
-  | "electric";
+  | 'diesel'
+  | 'petrol'
+  | 'hybrid'
+  | 'electric';
 
 export type CamperAmenity =
-  | "ac"
-  | "bathroom"
-  | "kitchen"
-  | "tv"
-  | "radio"
-  | "refrigerator"
-  | "microwave"
-  | "gas"
-  | "water";
+  | 'ac'
+  | 'bathroom'
+  | 'kitchen'
+  | 'tv'
+  | 'radio'
+  | 'refrigerator'
+  | 'microwave'
+  | 'gas'
+  | 'water';
 
 export interface CamperListItem {
   id: string;
   name: string;
   price: number;
   rating: number;
+  totalReviews: number;
   location: string;
+  description: string;
   form: CamperForm;
   length: string;
   width: string;
@@ -41,7 +43,6 @@ export interface CamperListItem {
   engine: CamperEngine;
   amenities: CamperAmenity[];
   coverImage: string;
-  totalReviews: number;
 }
 
 export interface CamperListResponse {
