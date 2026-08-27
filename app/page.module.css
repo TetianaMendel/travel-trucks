@@ -53,3 +53,10 @@
 .button:hover {
   background: #6d7b75;
 }
+
+.catalog {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 64px;
+}
