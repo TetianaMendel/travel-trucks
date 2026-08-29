@@ -154,10 +154,6 @@ export default function CamperList() {
         <CamperFilters />
 
         <div className={styles.results}>
-          <h1 className={styles.title}>
-            Campers
-          </h1>
-
           {campers.length === 0 ? (
             <p className={styles.message}>
               No campers found.

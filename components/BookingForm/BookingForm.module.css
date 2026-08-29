@@ -1,0 +1,135 @@
+.wrapper {
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    width: 641px;
+    padding: 44px;
+}
+
+.titleBook {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--main);
+    margin-bottom: 8px;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray);
+    margin-bottom: 24px;
+}
+
+.fieldWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.field:has(.error)::before {
+    content: "Name*";
+    position: absolute;
+    top: -12px;
+    left: 18px;
+    z-index: 2;
+    border-radius: 8px;
+    padding: 0 8px;
+    width: 54px;
+    height: 16px;
+    background-color: #ffdfdf;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.33333;
+    color: #ec383b;
+}
+
+.emailField:has(.error)::before {
+    content: "Email*";
+}
+
+.input {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--main);
+    border-radius: 12px;
+    padding: 18px;
+    width: 527px;
+    height: 60px;
+    background: var(--inputs);
+    outline: none;
+    border: none;
+}
+
+.input:placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray);
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.errorIcon {
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+
+    display: none;
+}
+
+.field:has(.error) .errorIcon {
+    display: block;
+}
+
+.field:has(.error) .input {
+    padding-right: 48px;
+}
+
+.error {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--button);
+}
+
+.field:has(.error) .input {
+    border: 1px solid var(--button);
+    background: #ffdfdf;
+}
+
+.btnSubmit {
+    border-radius: 200px;
+    padding: 16px 60px;
+    width: 527px;
+    height: 56px;
+    background-color: var(--grey-green);
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: #fff;
+}
+
+.btnSubmit:hover,
+.btnSubmit:focus {
+    background-color: var(--green-hover);
+}
+
+.btnSubmit:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

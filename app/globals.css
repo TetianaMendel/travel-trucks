@@ -29,7 +29,10 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+
+h1,
+h2,
+p {
   margin: 0;
 }
 
@@ -53,9 +56,3 @@ img {
   max-width: 100%;
 }
 
-.container {
-  width: 100%;
-  margin: 0 auto;
-  max-width: 1440px;
-  padding: 0 64px;
-}

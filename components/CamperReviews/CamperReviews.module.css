@@ -1,0 +1,94 @@
+.reviews {
+    width: 100%;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.review {
+    width: 100%;
+    min-height: 180px;
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 16px;
+    background-color: var(--inputs);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--white);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 150%;
+    color: var(--grey-green);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    margin: 0;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--main);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-top: 2px;
+}
+
+.star,
+.starActive {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.starActive {
+    color: var(--rating);
+}
+
+.star {
+    color: var(--gray-light);
+}
+
+.comment {
+    margin: 0;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143%;
+    color: var(--text);
+}
+
+.empty {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 143%;
+    color: var(--text);
+}
+

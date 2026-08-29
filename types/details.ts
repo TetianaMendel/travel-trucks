@@ -13,6 +13,15 @@ export interface CamperImage {
   order: number;
 }
 
+export interface Review {
+  id: string;
+  camperId: string;
+  reviewer_name: string;
+  reviewer_rating: number;
+  comment: string;
+  createdAt: string;
+}
+
 export interface CamperDetails {
   id: string;
   name: string;
@@ -31,17 +40,9 @@ export interface CamperDetails {
   engine: CamperEngine;
   amenities: CamperAmenity[];
   gallery: CamperImage[];
+  reviews: Review[];
   createdAt: string;
   updatedAt: string;
-}
-
-export interface Review {
-  id: string;
-  camperId: string;
-  reviewer_name: string;
-  reviewer_rating: number;
-  comment: string;
-  createdAt: string;
 }
 
 export interface BookingRequest {

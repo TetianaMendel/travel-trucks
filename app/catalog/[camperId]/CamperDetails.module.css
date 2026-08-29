@@ -1,0 +1,166 @@
+.page {
+    width: 100%;
+    padding: 64px 0;
+}
+
+.container {
+    width: 1312px;
+    max-width: calc(100% - 32px);
+    margin: 0 auto;
+}
+
+.topSection {
+    display: grid;
+    grid-template-columns: 638px 650px;
+    column-gap: 24px;
+}
+
+
+.infoColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.infoCard {
+    background-color: var(--inputs);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.title {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+}
+
+.meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.rating,
+.location {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+    line-height: 150%;
+    font-size: 16px;
+}
+
+.ratingIcon {
+    color: var(--rating);
+}
+
+.locationIcon {
+    color: var(--main);
+}
+
+.price {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    margin-bottom: 24px;
+}
+
+.description {
+    line-height: 150%;
+    color: var(--text);
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.detailsCard {
+    background-color: var(--inputs);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.detailsTitle {
+    margin-bottom: 16px;
+    color: var(--main);
+    line-height: 133%;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.amenities {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.amenity {
+    border-radius: 100px;
+    padding: 12px 18px;
+    background: var(--badges);
+    mix-blend-mode: multiply;
+    line-height: 150%;
+    text-transform: capitalize;
+}
+
+.divider {
+    width: 100%;
+    height: 0;
+    margin: 16px 0;
+    border: 1px solid var(--gray-light);
+}
+
+.specifications {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.specification {
+    display: flex;
+    justify-content: space-between;
+    line-height: 150%;
+    text-transform: capitalize;
+}
+
+.bottomSection {
+    margin-top: 58px;
+}
+
+.reviewsTitle {
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--main);
+}
+
+.reviewBlocksContainer {
+    display: grid;
+    grid-template-columns: 623px 641px;
+    gap: 48px;
+    align-items: start;
+}
+
+.reviews {
+    width: 100%;
+}
+
+.booking {
+    width: 100%;
+}
+
+.message,
+.error {
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.error {
+    color: var(--error);
+}
+

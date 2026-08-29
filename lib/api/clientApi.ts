@@ -9,6 +9,7 @@ import type {
   BookingRequest,
   BookingResponse,
   CamperDetails,
+  Review,
 } from "@/types/details";
 
 export const getCampers = async (
@@ -31,12 +32,22 @@ export const getSingleCamper = async (
   return data;
 };
 
+export const getReviews = async (
+  camperId: string
+): Promise<Review[]> => {
+  const { data } = await api.get<Review[]>(
+    `/campers/${camperId}/reviews`
+  );
+
+  return data;
+};
+
 export const createBooking = async (
   camperId: string,
   bookingData: BookingRequest
 ): Promise<BookingResponse> => {
   const { data } = await api.post<BookingResponse>(
-    `/campers/${camperId}/bookings`,
+    `/campers/${camperId}/booking-requests`,
     bookingData
   );
 

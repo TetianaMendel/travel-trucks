@@ -26,3 +26,4 @@ export const getSingleCamper = async (
 
   return data;
 };
+

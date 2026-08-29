@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import {
   FaCog,
   FaGasPump,
@@ -9,9 +8,7 @@ import {
 } from "react-icons/fa";
 
 import { GrMapLocation } from "react-icons/gr";
-
 import type { CamperListItem } from "@/types/camper";
-
 import styles from "./CamperItem.module.css";
 
 type Props = {
@@ -44,7 +41,7 @@ const CamperItem = ({ item }: Props) => {
           </h2>
 
           <p className={styles.price}>
-            €{item.price.toFixed(2)}
+            €{item.price.toFixed(0)}
           </p>
         </div>
 
@@ -56,7 +53,7 @@ const CamperItem = ({ item }: Props) => {
             />
 
             {item.rating} (
-            {item.totalReviews} reviews)
+            {item.totalReviews} Reviews)
           </span>
 
           <span className={styles.location}>
