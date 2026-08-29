@@ -103,8 +103,6 @@ const CamperFilters = () => {
     const normalizedLocation =
       location.trim();
 
-    // Зберігаємо location навіть якщо він порожній.
-    // Порожній location означає пошук по всіх локаціях.
     params.set(
       "location",
       normalizedLocation
@@ -131,14 +129,11 @@ const CamperFilters = () => {
   };
 
   const handleClearFilters = () => {
-    // Повністю очищаємо локальний state
     setLocation("");
     setForm(undefined);
     setEngine(undefined);
     setTransmission(undefined);
 
-    // Передаємо порожні значення в URL,
-    // щоб CamperList не застосовував default filters.
     const params = new URLSearchParams();
 
     params.set("location", "");
@@ -156,7 +151,6 @@ const CamperFilters = () => {
       className={styles.filters}
       onSubmit={handleSearch}
     >
-      {/* Location */}
       <div className={styles.locationField}>
         <label
           htmlFor="location"
@@ -182,12 +176,10 @@ const CamperFilters = () => {
         </div>
       </div>
 
-      {/* Filters */}
       <h2 className={styles.title}>
         Filters
       </h2>
 
-      {/* Camper form */}
       <fieldset className={styles.group}>
         <legend className={styles.legend}>
           Camper form
@@ -248,7 +240,6 @@ const CamperFilters = () => {
         </label>
       </fieldset>
 
-      {/* Engine */}
       <fieldset className={styles.group}>
         <legend className={styles.legend}>
           Engine
@@ -307,7 +298,6 @@ const CamperFilters = () => {
         </label>
       </fieldset>
 
-      {/* Transmission */}
       <fieldset className={styles.group}>
         <legend className={styles.legend}>
           Transmission
@@ -348,7 +338,6 @@ const CamperFilters = () => {
         </label>
       </fieldset>
 
-      {/* Buttons */}
       <div className={styles.buttons}>
         <button
           type="submit"

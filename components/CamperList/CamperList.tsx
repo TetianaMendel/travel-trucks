@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import CamperFilters from "@/components/CamperFilters/CamperFilters";
 import CamperItem from "@/components/CamperItem/CamperItem";
+import Loader from "@/components/Loader/Loader";
 
 import { getCampers } from "@/lib/api/clientApi";
 
@@ -27,20 +28,12 @@ const DEFAULT_TRANSMISSION: CamperTransmission =
 export default function CamperList() {
   const searchParams = useSearchParams();
 
-  const locationParam =
-    searchParams.get("location");
-
-  const formParam =
-    searchParams.get("form");
-
-  const engineParam =
-    searchParams.get("engine");
-
+  const locationParam = searchParams.get("location");
+  const formParam = searchParams.get("form");
+  const engineParam = searchParams.get("engine");
   const transmissionParam =
     searchParams.get("transmission");
 
-  // Якщо параметра немає взагалі — використовуємо default.
-  // Якщо параметр є, але він порожній — фільтр очищений.
   const location =
     locationParam === null
       ? DEFAULT_LOCATION
@@ -71,7 +64,7 @@ export default function CamperList() {
     data,
     fetchNextPage,
     hasNextPage,
-    isLoading,
+    isFetching,
     isFetchingNextPage,
     isError,
   } = useInfiniteQuery({
@@ -87,11 +80,7 @@ export default function CamperList() {
       getCampers({
         page: pageParam,
         perPage: PER_PAGE,
-
-        // Порожній location означає:
-        // не передавати фільтр location в API.
         location: location || undefined,
-
         form,
         transmission,
         engine,
@@ -116,22 +105,6 @@ export default function CamperList() {
       (page) => page.campers
     ) ?? [];
 
-  if (isLoading) {
-    return (
-      <section className={styles.section}>
-        <div className={styles.layout}>
-          <CamperFilters />
-
-          <div className={styles.results}>
-            <p className={styles.message}>
-              Loading campers...
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   if (isError) {
     return (
       <section className={styles.section}>
@@ -149,46 +122,50 @@ export default function CamperList() {
   }
 
   return (
-    <section className={styles.section}>
-      <div className={styles.layout}>
-        <CamperFilters />
+    <>
+      {isFetching && !isFetchingNextPage && (
+        <Loader />
+      )}
 
-        <div className={styles.results}>
-          {campers.length === 0 ? (
-            <p className={styles.message}>
-              No campers found.
-            </p>
-          ) : (
-            <>
-              <ul className={styles.list}>
-                {campers.map((camper) => (
-                  <CamperItem
-                    key={camper.id}
-                    item={camper}
-                  />
-                ))}
-              </ul>
+      <section className={styles.section}>
+        <div className={styles.layout}>
+          <CamperFilters />
 
-              {hasNextPage && (
-                <button
-                  type="button"
-                  className={styles.loadMore}
-                  onClick={() =>
-                    fetchNextPage()
-                  }
-                  disabled={
-                    isFetchingNextPage
-                  }
-                >
-                  {isFetchingNextPage
-                    ? "Loading..."
-                    : "Load More"}
-                </button>
-              )}
-            </>
-          )}
+          <div className={styles.results}>
+            {campers.length === 0 ? (
+              <p className={styles.message}>
+                No campers found.
+              </p>
+            ) : (
+              <>
+                <ul className={styles.list}>
+                  {campers.map((camper) => (
+                    <CamperItem
+                      key={camper.id}
+                      item={camper}
+                    />
+                  ))}
+                </ul>
+
+                {hasNextPage && (
+                  <button
+                    type="button"
+                    className={styles.loadMore}
+                    onClick={() =>
+                      fetchNextPage()
+                    }
+                    disabled={isFetchingNextPage}
+                  >
+                    {isFetchingNextPage
+                      ? "Loading..."
+                      : "Load More"}
+                  </button>
+                )}
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
