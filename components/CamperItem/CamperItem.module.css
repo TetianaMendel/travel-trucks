@@ -1,13 +1,19 @@
 .card {
     display: flex;
-    align-items: flex-start;
-    width: 100%;
     min-height: 272px;
     gap: 24px;
-    padding: 16px;
-    border: 1px solid var(--gray-light);
     border-radius: 16px;
-    background-color: var(--white);
+    padding: 24px;
+    width: 100%;
+    background: var(--inputs);
+    transition:
+        transform 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .imageWrapper {
