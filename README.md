@@ -4,7 +4,7 @@
 
 # 📖 Про проєкт
 
-🌐 Live Page: Переглянути проєкт
+🌐 Live Page: https://travel-trucks-dusky-pi.vercel.app/
 
 TravelTrucks — це вебзастосунок для пошуку та оренди кемперів для подорожей.
 
