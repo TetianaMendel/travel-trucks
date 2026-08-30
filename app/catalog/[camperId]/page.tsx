@@ -1,15 +1,15 @@
 import {
- HydrationBoundary,
- QueryClient,
- dehydrate,
+  QueryClient,
+  HydrationBoundary,
+  dehydrate,
 } from "@tanstack/react-query";
+import type { Metadata } from "next";
 
 import CamperDetailsClient from "./CamperDetails.client";
 import { getSingleCamper } from "@/lib/api/serverApi";
-import type { Metadata } from "next";
 
 type Props = {
- params: Promise<{ camperId: string }>;
+  params: Promise<{ camperId: string }>;
 };
 
 export async function generateMetadata({
@@ -32,21 +32,20 @@ export async function generateMetadata({
   }
 }
 
-
 const CamperDetails = async ({ params }: Props) => {
- const { camperId } = await params;
- const queryClient = new QueryClient();
- await queryClient.prefetchQuery({
-   queryKey: ["camper", camperId],
-   queryFn: () => getSingleCamper(camperId),
- });
+  const { camperId } = await params;
+  const queryClient = new QueryClient();
 
+  await queryClient.query({
+    queryKey: ["camper", camperId],
+    queryFn: () => getSingleCamper(camperId),
+  });
 
- return (
-   <HydrationBoundary state={dehydrate(queryClient)}>
-     <CamperDetailsClient />
-   </HydrationBoundary>
- );
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <CamperDetailsClient />
+    </HydrationBoundary>
+  );
 };
 
 export default CamperDetails;

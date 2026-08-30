@@ -2,7 +2,7 @@
 
 import {
   ChangeEvent,
-  FormEvent,
+  SubmitEvent,
   useState,
 } from "react";
 
@@ -23,36 +23,49 @@ import type {
 
 import styles from "./CamperFilters.module.css";
 
-const CamperFilters = () => {
+interface CamperFiltersProps {
+  isCleared?: boolean;
+}
+
+const CamperFilters = ({
+  isCleared = false,
+}: CamperFiltersProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [location, setLocation] = useState(
-    searchParams.get("location") ?? ""
+    isCleared
+      ? ""
+      : searchParams.get("location") ?? "Kyiv"
   );
 
   const [form, setForm] = useState<
     CamperForm | undefined
   >(
-    (searchParams.get("form") as CamperForm) ||
-      undefined
+    isCleared
+      ? undefined
+      : (searchParams.get("form") as CamperForm | null) ??
+          "panel_van"
   );
 
   const [engine, setEngine] = useState<
     CamperEngine | undefined
   >(
-    (searchParams.get("engine") as CamperEngine) ||
-      undefined
+    isCleared
+      ? undefined
+      : (searchParams.get("engine") as CamperEngine | null) ??
+          "petrol"
   );
 
   const [transmission, setTransmission] =
-    useState<
-      CamperTransmission | undefined
-    >(
-      (searchParams.get(
-        "transmission"
-      ) as CamperTransmission) || undefined
+    useState<CamperTransmission | undefined>(
+      isCleared
+        ? undefined
+        : (searchParams.get(
+            "transmission"
+          ) as CamperTransmission | null) ??
+            "automatic"
     );
 
   const handleLocationChange = (
@@ -64,17 +77,13 @@ const CamperFilters = () => {
   const handleFormChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setForm(
-      event.target.value as CamperForm
-    );
+    setForm(event.target.value as CamperForm);
   };
 
   const handleEngineChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setEngine(
-      event.target.value as CamperEngine
-    );
+    setEngine(event.target.value as CamperEngine);
   };
 
   const handleTransmissionChange = (
@@ -86,14 +95,13 @@ const CamperFilters = () => {
   };
 
   const handleSearch = (
-    event: FormEvent<HTMLFormElement>
+    event: SubmitEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
     const params = new URLSearchParams();
 
-    const normalizedLocation =
-      location.trim();
+    const normalizedLocation = location.trim();
 
     if (normalizedLocation) {
       params.set(
@@ -132,7 +140,7 @@ const CamperFilters = () => {
     setEngine(undefined);
     setTransmission(undefined);
 
-    router.push(pathname);
+    router.replace(pathname);
   };
 
   return (
@@ -140,17 +148,21 @@ const CamperFilters = () => {
       className={styles.filters}
       onSubmit={handleSearch}
     >
-      <div className={styles.locationField}>
+      <div className={styles.locationSection}>
         <label
           htmlFor="location"
-          className={styles.label}
+          className={styles.locationLabel}
         >
           Location
         </label>
 
-        <div className={styles.inputWrapper}>
+        <div className={styles.locationInputWrapper}>
           <GrMapLocation
-            className={styles.locationIcon}
+            className={`${styles.locationIcon} ${
+              location
+                ? styles.locationIconActive
+                : ""
+            }`}
             aria-hidden="true"
           />
 
@@ -158,176 +170,159 @@ const CamperFilters = () => {
             id="location"
             name="location"
             type="text"
+            placeholder="Kyiv"
             value={location}
             onChange={handleLocationChange}
-            className={styles.input}
+            className={styles.locationInput}
           />
         </div>
       </div>
 
-      <h2 className={styles.title}>
+      <p className={styles.filtersLabel}>
         Filters
-      </h2>
+      </p>
 
-      <fieldset className={styles.group}>
-        <legend className={styles.legend}>
-          Camper form
-        </legend>
+      <div className={styles.filterWrapper}>
+        <fieldset className={styles.filterGroup}>
+          <legend className={styles.filterTitle}>
+            Camper form
+          </legend>
 
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="form"
-            value="alcove"
-            checked={form === "alcove"}
-            onChange={handleFormChange}
-            className={styles.radio}
-          />
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="form"
+              value="alcove"
+              checked={form === "alcove"}
+              onChange={handleFormChange}
+            />
+            Alcove
+          </label>
 
-          <span>Alcove</span>
-        </label>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="form"
+              value="panel_van"
+              checked={form === "panel_van"}
+              onChange={handleFormChange}
+            />
+            Panel Van
+          </label>
 
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="form"
-            value="panel_van"
-            checked={form === "panel_van"}
-            onChange={handleFormChange}
-            className={styles.radio}
-          />
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="form"
+              value="integrated"
+              checked={form === "integrated"}
+              onChange={handleFormChange}
+            />
+            Integrated
+          </label>
 
-          <span>Panel Van</span>
-        </label>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="form"
+              value="semi_integrated"
+              checked={
+                form === "semi_integrated"
+              }
+              onChange={handleFormChange}
+            />
+            Semi-integrated
+          </label>
+        </fieldset>
 
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="form"
-            value="integrated"
-            checked={form === "integrated"}
-            onChange={handleFormChange}
-            className={styles.radio}
-          />
+        <fieldset className={styles.filterGroup}>
+          <legend className={styles.filterTitle}>
+            Engine
+          </legend>
 
-          <span>Integrated</span>
-        </label>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="engine"
+              value="diesel"
+              checked={engine === "diesel"}
+              onChange={handleEngineChange}
+            />
+            Diesel
+          </label>
 
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="form"
-            value="semi_integrated"
-            checked={
-              form === "semi_integrated"
-            }
-            onChange={handleFormChange}
-            className={styles.radio}
-          />
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="engine"
+              value="petrol"
+              checked={engine === "petrol"}
+              onChange={handleEngineChange}
+            />
+            Petrol
+          </label>
 
-          <span>Semi-integrated</span>
-        </label>
-      </fieldset>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="engine"
+              value="hybrid"
+              checked={engine === "hybrid"}
+              onChange={handleEngineChange}
+            />
+            Hybrid
+          </label>
 
-      <fieldset className={styles.group}>
-        <legend className={styles.legend}>
-          Engine
-        </legend>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="engine"
+              value="electric"
+              checked={engine === "electric"}
+              onChange={handleEngineChange}
+            />
+            Electric
+          </label>
+        </fieldset>
 
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="engine"
-            value="diesel"
-            checked={engine === "diesel"}
-            onChange={handleEngineChange}
-            className={styles.radio}
-          />
+        <fieldset className={styles.filterGroup}>
+          <legend className={styles.filterTitle}>
+            Transmission
+          </legend>
 
-          <span>Diesel</span>
-        </label>
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="transmission"
+              value="automatic"
+              checked={
+                transmission === "automatic"
+              }
+              onChange={
+                handleTransmissionChange
+              }
+            />
+            Automatic
+          </label>
 
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="engine"
-            value="petrol"
-            checked={engine === "petrol"}
-            onChange={handleEngineChange}
-            className={styles.radio}
-          />
+          <label className={styles.radioLabel}>
+            <input
+              type="radio"
+              name="transmission"
+              value="manual"
+              checked={
+                transmission === "manual"
+              }
+              onChange={
+                handleTransmissionChange
+              }
+            />
+            Manual
+          </label>
+        </fieldset>
+      </div>
 
-          <span>Petrol</span>
-        </label>
-
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="engine"
-            value="hybrid"
-            checked={engine === "hybrid"}
-            onChange={handleEngineChange}
-            className={styles.radio}
-          />
-
-          <span>Hybrid</span>
-        </label>
-
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="engine"
-            value="electric"
-            checked={engine === "electric"}
-            onChange={handleEngineChange}
-            className={styles.radio}
-          />
-
-          <span>Electric</span>
-        </label>
-      </fieldset>
-
-      <fieldset className={styles.group}>
-        <legend className={styles.legend}>
-          Transmission
-        </legend>
-
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="transmission"
-            value="automatic"
-            checked={
-              transmission === "automatic"
-            }
-            onChange={
-              handleTransmissionChange
-            }
-            className={styles.radio}
-          />
-
-          <span>Automatic</span>
-        </label>
-
-        <label className={styles.radioLabel}>
-          <input
-            type="radio"
-            name="transmission"
-            value="manual"
-            checked={
-              transmission === "manual"
-            }
-            onChange={
-              handleTransmissionChange
-            }
-            className={styles.radio}
-          />
-
-          <span>Manual</span>
-        </label>
-      </fieldset>
-
-      <div className={styles.buttons}>
+      <div className={styles.actions}>
         <button
           type="submit"
           className={styles.searchButton}
@@ -341,10 +336,9 @@ const CamperFilters = () => {
           onClick={handleClearFilters}
         >
           <IoClose
-            className={styles.clearIcon}
+            className={styles.btnIcon}
             aria-hidden="true"
           />
-
           Clear filters
         </button>
       </div>

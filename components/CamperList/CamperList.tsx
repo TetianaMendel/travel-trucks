@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 import CamperFilters from "@/components/CamperFilters/CamperFilters";
 import CamperItem from "@/components/CamperItem/CamperItem";
@@ -24,12 +28,22 @@ export default function CamperList() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const locationParam = searchParams.get("location");
-  const formParam = searchParams.get("form");
-  const engineParam = searchParams.get("engine");
-  const transmissionParam = searchParams.get("transmission");
+  const [isCleared, setIsCleared] = useState(false);
 
-  const location = locationParam || undefined;
+  const locationParam =
+    searchParams.get("location");
+
+  const formParam =
+    searchParams.get("form");
+
+  const engineParam =
+    searchParams.get("engine");
+
+  const transmissionParam =
+    searchParams.get("transmission");
+
+  const location =
+    locationParam || undefined;
 
   const form = formParam
     ? (formParam as CamperForm)
@@ -55,8 +69,8 @@ export default function CamperList() {
       "campers",
       location,
       form,
-      transmission,
       engine,
+      transmission,
     ],
 
     queryFn: ({ pageParam }) =>
@@ -65,14 +79,17 @@ export default function CamperList() {
         perPage: PER_PAGE,
         location,
         form,
-        transmission,
         engine,
+        transmission,
       }),
 
     initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
-      if (lastPage.page < lastPage.totalPages) {
+      if (
+        lastPage.page <
+        lastPage.totalPages
+      ) {
         return lastPage.page + 1;
       }
 
@@ -81,9 +98,12 @@ export default function CamperList() {
   });
 
   const campers =
-    data?.pages.flatMap((page) => page.campers) ?? [];
+    data?.pages.flatMap(
+      (page) => page.campers
+    ) ?? [];
 
   const handleClearFilters = () => {
+    setIsCleared(true);
     router.replace("/catalog");
   };
 
@@ -92,7 +112,8 @@ export default function CamperList() {
       <section className={styles.section}>
         <div className={styles.layout}>
           <CamperFilters
-            key={searchParams.toString()}
+            key={`error-${isCleared}`}
+            isCleared={true}
           />
 
           <div className={styles.results}>
@@ -107,12 +128,14 @@ export default function CamperList() {
 
   return (
     <>
-      {isFetching && !isFetchingNextPage && <Loader />}
+      {isFetching &&
+        !isFetchingNextPage && <Loader />}
 
       <section className={styles.section}>
         <div className={styles.layout}>
           <CamperFilters
-            key={searchParams.toString()}
+            key={`${searchParams.toString()}-${isCleared}`}
+            isCleared={isCleared}
           />
 
           <div className={styles.results}>
@@ -121,14 +144,17 @@ export default function CamperList() {
                 title="No campers found"
                 text={
                   <>
-                    We couldn&apos;t find any campers that
-                    match your filters.
+                    We couldn&apos;t find any
+                    campers that match your
+                    filters.
                     <br />
-                    Try adjusting your search or clearing
-                    some filters.
+                    Try adjusting your search
+                    or clearing some filters.
                   </>
                 }
-                onClearFilters={handleClearFilters}
+                onClearFilters={
+                  handleClearFilters
+                }
               />
             ) : (
               <>
@@ -145,8 +171,12 @@ export default function CamperList() {
                   <button
                     type="button"
                     className={styles.loadMore}
-                    onClick={() => fetchNextPage()}
-                    disabled={isFetchingNextPage}
+                    onClick={() =>
+                      fetchNextPage()
+                    }
+                    disabled={
+                      isFetchingNextPage
+                    }
                   >
                     {isFetchingNextPage
                       ? "Loading..."
