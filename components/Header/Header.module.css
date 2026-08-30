@@ -1,16 +1,57 @@
 .header {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 24px;
-    padding: 12px;
-    border-block-end: 1px solid #ccc;
+    padding: 24px 64px;
+    background: var(--inputs);
+    border-bottom: 1px solid var(--badges);
+    height: 72px;
+}
+
+.headerLink {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.headerLink:hover {
+    color: #ddd;
 }
 
 .navigation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 12px;
-    list-style-type: none;
+    gap: 32px;
+}
+
+.navigationItem {
+    display: flex;
+    align-items: center;
+}
+
+.navigationLink {
+    text-decoration: none;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--main);
+}
+
+.active {
+    color: var(--grey-green);
+}
+
+.navigationLink:hover {
+    outline: none;
+    transform: scale(1.2);
 }

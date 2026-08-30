@@ -1,19 +1,43 @@
-import css from './Header.module.css';
-import Link from 'next/link';
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import css from "./Header.module.css";
 
 const Header = () => {
+  const pathname = usePathname();
+
   return (
     <header className={css.header}>
-      <Link href='/' aria-label='Home'>
-        TravelTrucks
+      <Link href="/" className={css.headerLink}>
+        <svg aria-hidden="true" width="136" height="15">
+          <use href="/icons/sprite.svg#icon-TravelTrucks" />
+        </svg>
       </Link>
-      <nav aria-label='Main Navigation'>
+
+      <nav aria-label="Main Navigation">
         <ul className={css.navigation}>
-          <li>
-            <Link href='/'>Home</Link>
+          <li className={css.navigationItem}>
+            <Link
+              href="/"
+              className={`${css.navigationLink} ${
+                pathname === "/" ? css.active : ""
+              }`}
+            >
+              Home
+            </Link>
           </li>
-          <li>
-            <Link href='/catalog'>Catalog</Link>
+
+          <li className={css.navigationItem}>
+            <Link
+              href="/catalog"
+              className={`${css.navigationLink} ${
+                pathname.startsWith("/catalog") ? css.active : ""
+              }`}
+            >
+              Catalog
+            </Link>
           </li>
         </ul>
       </nav>
