@@ -39,9 +39,9 @@ const CamperDetailsClient = () => {
 
   if (isCamperLoading || isReviewsLoading) {
     return (
-      <main className={styles.page}>
+      <section className={styles.page}>
         <p className={styles.message}>Loading...</p>
-      </main>
+      </section>
     );
   }
 
@@ -51,11 +51,11 @@ const CamperDetailsClient = () => {
     !camper
   ) {
     return (
-      <main className={styles.page}>
+      <section className={styles.page}>
         <p className={styles.error}>
           Something went wrong...
         </p>
-      </main>
+      </section>
     );
   }
 
@@ -66,9 +66,9 @@ const CamperDetailsClient = () => {
     .join(", ");
 
   return (
-    <main className={styles.page}>
+    <section className={styles.page}>
       <div className={styles.container}>
-        <section className={styles.topSection}>
+        <div className={styles.topSection}>
           <div className={styles.galleryColumn}>
             <CamperGallery
               gallery={camper.gallery}
@@ -76,7 +76,7 @@ const CamperDetailsClient = () => {
           </div>
 
           <div className={styles.infoColumn}>
-            <section className={styles.infoCard}>
+            <div className={styles.infoCard}>
               <h1 className={styles.title}>
                 {camper.name}
               </h1>
@@ -109,9 +109,9 @@ const CamperDetailsClient = () => {
               <p className={styles.description}>
                 {camper.description}
               </p>
-            </section>
+            </div>
 
-            <section className={styles.detailsCard}>
+            <div className={styles.detailsCard}>
               <h2 className={styles.detailsTitle}>
                 Vehicle details
               </h2>
@@ -172,11 +172,11 @@ const CamperDetailsClient = () => {
                   <span>{camper.consumption}</span>
                 </div>
               </div>
-            </section>
+            </div>
           </div>
-        </section>
+        </div>
 
-        <section className={styles.bottomSection}>
+        <div className={styles.bottomSection}>
           <h2 className={styles.reviewsTitle}>
             Reviews
           </h2>
@@ -186,9 +186,9 @@ const CamperDetailsClient = () => {
 
             <BookingForm camperId={camper.id} />
           </div>
-        </section>
+        </div>
       </div>
-    </main>
+    </section>
   );
 };
 

@@ -10,11 +10,9 @@ export const metadata: Metadata = {
 
 const Catalog = () => {
   return (
-    <main>
       <section className={styles.container}>
         <CamperList />
       </section>
-    </main>
   );
 };
 

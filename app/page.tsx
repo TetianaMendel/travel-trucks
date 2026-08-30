@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main>
       <section className={css.section}>
         <div className="container">
           <h1 className={css.title}>Campers of your dreams</h1>
@@ -16,6 +15,5 @@ export default function Home() {
           </Link>
         </div>
       </section>
-    </main>
   );
 }
