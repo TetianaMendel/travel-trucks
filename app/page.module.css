@@ -1,21 +1,14 @@
 
-.main {
-  flex: 1;
-}
-
 .section {
   background-color: var(--gray);
   padding-top: 267px;
-  padding-bottom: 318px;
   background-image:
       linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
       url("/images/hero.jpg");
-  max-width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   min-height: 100vh;
-  margin: 0 auto;
 }
 
 .title {
@@ -31,10 +24,11 @@
   font-size: 24px;
   line-height: 1.33;
   color: var(--inputs);
-  margin-bottom: 56px;
+  margin-bottom: 40px;
 }
 
 .link {
+  display: inline-flex;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
@@ -42,8 +36,6 @@
   color: var(--white);
   border-radius: 200px;
   padding: 16px 60px;
-  width: 173px;
-  height: 56px;
   background-color: var(--grey-green);
 }
 
