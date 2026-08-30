@@ -23,34 +23,27 @@ import type {
 
 import styles from "./CamperFilters.module.css";
 
-const DEFAULT_LOCATION = "Kyiv";
-const DEFAULT_FORM: CamperForm = "panel_van";
-const DEFAULT_ENGINE: CamperEngine = "petrol";
-const DEFAULT_TRANSMISSION: CamperTransmission =
-  "automatic";
-
 const CamperFilters = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const [location, setLocation] = useState(
-    searchParams.get("location") ??
-      DEFAULT_LOCATION
+    searchParams.get("location") ?? ""
   );
 
   const [form, setForm] = useState<
     CamperForm | undefined
   >(
-    (searchParams.get("form") as CamperForm) ??
-      DEFAULT_FORM
+    (searchParams.get("form") as CamperForm) ||
+      undefined
   );
 
   const [engine, setEngine] = useState<
     CamperEngine | undefined
   >(
-    (searchParams.get("engine") as CamperEngine) ??
-      DEFAULT_ENGINE
+    (searchParams.get("engine") as CamperEngine) ||
+      undefined
   );
 
   const [transmission, setTransmission] =
@@ -59,8 +52,7 @@ const CamperFilters = () => {
     >(
       (searchParams.get(
         "transmission"
-      ) as CamperTransmission) ??
-        DEFAULT_TRANSMISSION
+      ) as CamperTransmission) || undefined
     );
 
   const handleLocationChange = (
@@ -103,10 +95,12 @@ const CamperFilters = () => {
     const normalizedLocation =
       location.trim();
 
-    params.set(
-      "location",
-      normalizedLocation
-    );
+    if (normalizedLocation) {
+      params.set(
+        "location",
+        normalizedLocation
+      );
+    }
 
     if (form) {
       params.set("form", form);
@@ -123,8 +117,12 @@ const CamperFilters = () => {
       );
     }
 
+    const queryString = params.toString();
+
     router.push(
-      `${pathname}?${params.toString()}`
+      queryString
+        ? `${pathname}?${queryString}`
+        : pathname
     );
   };
 
@@ -134,16 +132,7 @@ const CamperFilters = () => {
     setEngine(undefined);
     setTransmission(undefined);
 
-    const params = new URLSearchParams();
-
-    params.set("location", "");
-    params.set("form", "");
-    params.set("engine", "");
-    params.set("transmission", "");
-
-    router.push(
-      `${pathname}?${params.toString()}`
-    );
+    router.push(pathname);
   };
 
   return (

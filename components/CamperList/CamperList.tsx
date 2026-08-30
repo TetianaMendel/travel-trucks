@@ -1,11 +1,12 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import CamperFilters from "@/components/CamperFilters/CamperFilters";
 import CamperItem from "@/components/CamperItem/CamperItem";
 import Loader from "@/components/Loader/Loader";
+import NotFoundCamper from "@/components/NotFoundCamper/NotFoundCamper";
 
 import { getCampers } from "@/lib/api/clientApi";
 
@@ -19,46 +20,28 @@ import styles from "./CamperList.module.css";
 
 const PER_PAGE = 4;
 
-const DEFAULT_LOCATION = "Kyiv";
-const DEFAULT_FORM: CamperForm = "panel_van";
-const DEFAULT_ENGINE: CamperEngine = "petrol";
-const DEFAULT_TRANSMISSION: CamperTransmission =
-  "automatic";
-
 export default function CamperList() {
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   const locationParam = searchParams.get("location");
   const formParam = searchParams.get("form");
   const engineParam = searchParams.get("engine");
-  const transmissionParam =
-    searchParams.get("transmission");
+  const transmissionParam = searchParams.get("transmission");
 
-  const location =
-    locationParam === null
-      ? DEFAULT_LOCATION
-      : locationParam;
+  const location = locationParam || undefined;
 
-  const form =
-    formParam === null
-      ? DEFAULT_FORM
-      : formParam
-        ? (formParam as CamperForm)
-        : undefined;
+  const form = formParam
+    ? (formParam as CamperForm)
+    : undefined;
 
-  const engine =
-    engineParam === null
-      ? DEFAULT_ENGINE
-      : engineParam
-        ? (engineParam as CamperEngine)
-        : undefined;
+  const engine = engineParam
+    ? (engineParam as CamperEngine)
+    : undefined;
 
-  const transmission =
-    transmissionParam === null
-      ? DEFAULT_TRANSMISSION
-      : transmissionParam
-        ? (transmissionParam as CamperTransmission)
-        : undefined;
+  const transmission = transmissionParam
+    ? (transmissionParam as CamperTransmission)
+    : undefined;
 
   const {
     data,
@@ -80,7 +63,7 @@ export default function CamperList() {
       getCampers({
         page: pageParam,
         perPage: PER_PAGE,
-        location: location || undefined,
+        location,
         form,
         transmission,
         engine,
@@ -89,10 +72,7 @@ export default function CamperList() {
     initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
-      if (
-        lastPage.page <
-        lastPage.totalPages
-      ) {
+      if (lastPage.page < lastPage.totalPages) {
         return lastPage.page + 1;
       }
 
@@ -101,15 +81,19 @@ export default function CamperList() {
   });
 
   const campers =
-    data?.pages.flatMap(
-      (page) => page.campers
-    ) ?? [];
+    data?.pages.flatMap((page) => page.campers) ?? [];
+
+  const handleClearFilters = () => {
+    router.replace("/catalog");
+  };
 
   if (isError) {
     return (
       <section className={styles.section}>
         <div className={styles.layout}>
-          <CamperFilters />
+          <CamperFilters
+            key={searchParams.toString()}
+          />
 
           <div className={styles.results}>
             <p className={styles.error}>
@@ -123,19 +107,29 @@ export default function CamperList() {
 
   return (
     <>
-      {isFetching && !isFetchingNextPage && (
-        <Loader />
-      )}
+      {isFetching && !isFetchingNextPage && <Loader />}
 
       <section className={styles.section}>
         <div className={styles.layout}>
-          <CamperFilters />
+          <CamperFilters
+            key={searchParams.toString()}
+          />
 
           <div className={styles.results}>
             {campers.length === 0 ? (
-              <p className={styles.message}>
-                No campers found.
-              </p>
+              <NotFoundCamper
+                title="No campers found"
+                text={
+                  <>
+                    We couldn&apos;t find any campers that
+                    match your filters.
+                    <br />
+                    Try adjusting your search or clearing
+                    some filters.
+                  </>
+                }
+                onClearFilters={handleClearFilters}
+              />
             ) : (
               <>
                 <ul className={styles.list}>
@@ -151,9 +145,7 @@ export default function CamperList() {
                   <button
                     type="button"
                     className={styles.loadMore}
-                    onClick={() =>
-                      fetchNextPage()
-                    }
+                    onClick={() => fetchNextPage()}
                     disabled={isFetchingNextPage}
                   >
                     {isFetchingNextPage
