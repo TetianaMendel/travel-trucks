@@ -9,59 +9,41 @@
 
 .label {
     display: block;
-
     margin-bottom: 8px;
-
-    font-family: var(--font-family);
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-
     color: var(--text);
 }
 
 .inputWrapper {
     position: relative;
-
     width: 100%;
 }
 
 .locationIcon {
     position: absolute;
-
     top: 50%;
     left: 18px;
-
     width: 20px;
     height: 20px;
-
     transform: translateY(-50%);
-
     color: var(--main);
-
     pointer-events: none;
 }
 
 .input {
     display: block;
-
     width: 100%;
     height: 56px;
-
     padding: 0 18px 0 48px;
-
     border: none;
     border-radius: 12px;
-
     outline: none;
-
     background-color: var(--inputs);
-
-    font-family: var(--font-family);
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-
     color: var(--main);
 }
 
@@ -69,55 +51,38 @@
     outline: 1px solid var(--grey-green);
 }
 
-/* Filters */
-
 .title {
     margin: 0 0 32px;
-
-    font-family: var(--font-family);
     font-weight: 600;
     font-size: 20px;
     line-height: 120%;
-
     color: var(--main);
 }
-
-/* Camper form / Engine / Transmission */
 
 .group {
     padding: 0;
     margin: 0 0 32px;
-
     border: none;
 }
 
 .legend {
     padding: 0;
     margin: 0 0 16px;
-
-    font-family: var(--font-family);
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-
     color: var(--gray);
 }
 
 .radioLabel {
     display: flex;
     align-items: center;
-
     gap: 12px;
-
     margin-bottom: 16px;
-
-    font-family: var(--font-family);
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-
     color: var(--main);
-
     cursor: pointer;
 }
 
@@ -127,39 +92,28 @@
 
 .radio {
     appearance: none;
-
     width: 20px;
     height: 20px;
-
     flex-shrink: 0;
-
     margin: 0;
-
     border: 1px solid var(--gray-light);
     border-radius: 50%;
-
     background-color: var(--white);
-
     cursor: pointer;
 }
 
 .radio:checked {
     border: 1px solid var(--grey-green);
-
     background:
         radial-gradient(circle,
             var(--grey-green) 0 6px,
             var(--white) 7px);
 }
 
-/* Buttons */
-
 .buttons {
     display: flex;
     flex-direction: column;
-
     gap: 16px;
-
     margin-top: 8px;
 }
 
@@ -167,26 +121,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 100%;
     height: 56px;
-
     padding: 16px 32px;
-
     border: none;
     border-radius: 200px;
-
     background-color: var(--grey-green);
-
-    font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
-
     color: var(--white);
-
     cursor: pointer;
-
     transition: background-color 200ms ease;
 }
 
@@ -198,28 +143,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 8px;
-
     width: 100%;
     height: 56px;
-
     padding: 16px 32px;
-
     border: 1px solid var(--gray-light);
     border-radius: 200px;
-
     background-color: transparent;
-
-    font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
-
     color: var(--main);
-
     cursor: pointer;
-
     transition:
         border-color 200ms ease,
         color 200ms ease;
@@ -232,6 +167,5 @@
 .clearIcon {
     width: 18px;
     height: 18px;
-
     flex-shrink: 0;
 }
