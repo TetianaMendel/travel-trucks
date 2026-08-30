@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚐 TravelTrucks
 
-## Getting Started
+![TravelTrucks](./public/images/hero-section-preview.webp)
 
-First, run the development server:
+# 📖 Про проєкт
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🌐 Live Page: Переглянути проєкт
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+TravelTrucks — це вебзастосунок для пошуку та оренди кемперів для подорожей.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Користувач може переглядати каталог доступних кемперів, фільтрувати їх за основними характеристиками, переглядати детальну інформацію про обраний кемпер, фотографії, технічні характеристики та відгуки, а також залишати заявку на бронювання.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Проєкт розроблено відповідно до дизайну у Figma з використанням Next.js, React та TypeScript.
 
-## Learn More
+# ✨ Основний функціонал
 
-To learn more about Next.js, take a look at the following resources:
+🏠 Головна сторінка
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Знайомство з сервісом TravelTrucks.
+- Навігація до каталогу кемперів.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🚐 Каталог кемперів
 
-## Deploy on Vercel
+- Перегляд списку доступних кемперів.
+- Фільтрація за локацією.
+- Фітрація за типом кузова, двигуна та трансмісії.
+- Динамічне завантаження кемперів за допомогою Load more.
+- Очищення всіх вибраних фільтрів за допомогою Clear filters.
+- Коректне відображення стану, коли за заданими параметрами кемперів не знайдено.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🔍 Сторінка окремого кемпера
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Перегляд детальної інформації про кемпер.
+- Галерея фотографій.
+- Відображення основних характеристик.
+- Інформація про комплектацію та зручності кемпера.
+- Перегляд відгуків користувачів.
+- Навігація між інформацією про кемпер та відгуками.
+
+📅 Бронювання
+
+- Форма для бронювання кемпера.
+- Валідація введених даних.
+- Відображення повідомлень про помилки.
+- Відображення повідомлення про успішне надсилання заявки.
+
+🎨 Інтерфейс
+
+- Відповідність дизайну макету.
+- Hover-ефекти та інтерактивні елементи.
+- Toast-повідомлення для взаємодії з користувачем.
+
+🔎 SEO
+
+- Метадані для сторінки каталогу.
+- Динамічні метадані для сторінок окремих кемперів.
+
+# 🛠 Використані технології
+
+| **Технологія**       | **Призначення**                                          |
+| -------------------- | -------------------------------------------------------- |
+| **Next.js**          | Фреймворк для розробки вебзастосунку                     |
+| **React**            | Створення користувацького інтерфейсу                     |
+| **TypeScript**       | Типізація та підвищення надійності коду                  |
+| **TanStack Query**   | Керування серверним станом, кешування та отримання даних |
+| **Axios**            | Виконання HTTP-запитів до API                            |
+| **Formik**           | Керування станом форм                                    |
+| **Yup**              | Валідація даних форм                                     |
+| **CSS Modules**      | Локальна стилізація компонентів                          |
+| **Swiper**           | Реалізація галереї зображень                             |
+| **React Hot Toast**  | Відображення toast-повідомлень                           |
+| **Next Image**       | Оптимізація зображень                                    |
+| **next/font**        | Оптимізоване підключення шрифтів                         |
+| **Modern Normalize** | Нормалізація стилів браузера                             |
+
+# 🚀 Встановлення та запуск
+
+1. Клонуйте репозиторій
+
+   git clone https://github.com/TetianaMendel/travel-trucks.git
+
+2. Перейдіть до папки проєкту
+
+   cd travel-trucks
+
+3. Встановіть залежності
+
+   npm install
+
+4. Запустіть проєкт у режимі розробки
+
+   npm run dev
+
+5. Після запуску відкрийте у браузері:
+
+   http://localhost:3000
+
+# 👩‍💻 Автор
+
+Тетяна Мендель - Junior Full-Stack Developer
+
+GitHub: https://github.com/TetianaMendel
+LinkedIn: www.linkedin.com/in/tetianamendel/
