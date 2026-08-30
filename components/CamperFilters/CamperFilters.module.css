@@ -162,8 +162,8 @@
 }
 
 .btnIcon {
-    width: 12px;
-    height: 12px;
+    width: 24px;
+    height: 24px;
     color: var(--main);
     stroke: var(--main);
 }
